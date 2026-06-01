@@ -1,0 +1,6 @@
+{
+  "name": "ScreenStudio",
+  "description": "Professional screen recorder with annotations and facecam presentation tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
