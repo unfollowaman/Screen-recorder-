@@ -8,7 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.presentation.home.HomeScreen
+import com.example.presentation.setup.SetupScreen
 import com.example.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,14 +24,25 @@ class MainActivity : ComponentActivity() {
     enableEdgeToEdge()
     setContent {
       MyApplicationTheme {
+        val navController = rememberNavController()
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-          HomeScreen(
-              recordingDao = appContainer.recordingDao,
-              onStartRecordingClicked = {
-                  // TODO Navigation to setup
-              },
-              modifier = Modifier.padding(innerPadding)
-          )
+          NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.padding(innerPadding)
+          ) {
+            composable("home") {
+              HomeScreen(
+                  recordingDao = appContainer.recordingDao,
+                  onStartRecordingClicked = {
+                      navController.navigate("setup")
+                  }
+              )
+            }
+            composable("setup") {
+              SetupScreen()
+            }
+          }
         }
       }
     }
