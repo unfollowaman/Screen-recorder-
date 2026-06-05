@@ -309,6 +309,18 @@ From the repository root:
 
 ---
 
+## CI Builds (GitHub Actions)
+
+When building a release APK in CI environments like GitHub Actions (`./gradlew assembleRelease`), you must provide the following environment variables. If they are not provided, the build will fail during the signing configuration step:
+
+- `KEYSTORE_PATH`: The path to your release keystore file. If not set, it defaults to `my-upload-key.jks` in the project root.
+- `STORE_PASSWORD`: The password for the keystore.
+- `KEY_PASSWORD`: The password for the specific key alias.
+
+In GitHub Actions, these should be configured via Repository Secrets and passed into the environment of your build step.
+
+---
+
 ## Configuration Notes
 
 - App namespace: `com.example`
